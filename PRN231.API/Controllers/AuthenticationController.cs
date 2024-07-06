@@ -8,7 +8,7 @@ using PRN231.Repo.Interfaces;
 namespace PRN231.API.Controllers;
 
 [ApiController]
-[Route("auth")]
+[Route("auths")]
 public class AuthenticationController : ControllerBase
 {
     private readonly IUnitOfWork _unitOfWork;
