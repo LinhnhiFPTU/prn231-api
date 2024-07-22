@@ -1,17 +1,18 @@
-﻿using System.Text.Json.Serialization;
+﻿using System;
+using System.Collections.Generic;
 
-namespace PRN231.Repo.Models;
-
-public class Role
+namespace PRN231.Repo.Models
 {
-    public Role()
+    public partial class Role
     {
-        Accounts = new HashSet<Account>();
+        public Role()
+        {
+            Accounts = new HashSet<Account>();
+        }
+
+        public int Id { get; set; }
+        public string? Name { get; set; }
+
+        public virtual ICollection<Account> Accounts { get; set; }
     }
-
-    public Guid Id { get; set; }
-    public string Name { get; set; } = null!;
-    public string? Status { get; set; } = null!;
-
-    [JsonIgnore] public virtual ICollection<Account> Accounts { get; set; }
 }
