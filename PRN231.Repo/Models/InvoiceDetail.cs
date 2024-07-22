@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Text.Json.Serialization;
 
 namespace PRN231.Repo.Models
 {
@@ -17,7 +18,7 @@ namespace PRN231.Repo.Models
         public bool? IsPromotion { get; set; }
         public bool? IsMemo { get; set; }
 
-        public virtual InventoryItem? InventoryItem { get; set; }
-        public virtual Invoice? Invoice { get; set; }
+        [JsonIgnore] public virtual InventoryItem? InventoryItem { get; set; }
+        [JsonIgnore] public virtual Invoice? Invoice { get; set; }
     }
 }

@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Text.Json.Serialization;
 
 namespace PRN231.Repo.Models
 {
@@ -13,7 +14,7 @@ namespace PRN231.Repo.Models
         public string? Username { get; set; }
         public int? BrandId { get; set; }
 
-        public virtual Brand? Brand { get; set; }
-        public virtual Role? Role { get; set; }
+        [JsonIgnore] public virtual Brand? Brand { get; set; }
+        [JsonIgnore] public virtual Role? Role { get; set; }
     }
 }

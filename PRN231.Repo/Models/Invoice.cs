@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Text.Json.Serialization;
 
 namespace PRN231.Repo.Models
 {
@@ -29,8 +30,8 @@ namespace PRN231.Repo.Models
         public decimal? TotalVatamount { get; set; }
         public decimal? TotalAmount { get; set; }
 
-        public virtual InvoiceTemplate? InvoiceTemplate { get; set; }
-        public virtual Store? Store { get; set; }
-        public virtual ICollection<InvoiceDetail> InvoiceDetails { get; set; }
+        [JsonIgnore] public virtual InvoiceTemplate? InvoiceTemplate { get; set; }
+        [JsonIgnore] public virtual Store? Store { get; set; }
+        [JsonIgnore] public virtual ICollection<InvoiceDetail> InvoiceDetails { get; set; }
     }
 }

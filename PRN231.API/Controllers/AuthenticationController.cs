@@ -27,8 +27,7 @@ public class AuthenticationController : ControllerBase
                 includeProperties: "Role").FirstOrDefault();
         if (loginAccount == null)
             throw new KeyNotFoundException("Invalid username or password");
-        if (loginAccount.Status == Status.DEACTIVE.ToString())
-            throw new BadHttpRequestException("Account is not active");
+
         var token = JwtUtil.GenerateJwtToken(loginAccount);
         var loginResponse = new BasicResponse
         {

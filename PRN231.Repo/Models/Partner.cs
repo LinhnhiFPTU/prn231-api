@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Text.Json.Serialization;
 
 namespace PRN231.Repo.Models
 {
@@ -18,6 +19,6 @@ namespace PRN231.Repo.Models
         public byte? Environment { get; set; }
         public byte? Status { get; set; }
 
-        public virtual ICollection<BrandPartnerMapping> BrandPartnerMappings { get; set; }
+        [JsonIgnore] public virtual ICollection<BrandPartnerMapping> BrandPartnerMappings { get; set; }
     }
 }

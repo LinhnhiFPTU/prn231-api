@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Text.Json.Serialization;
 
 namespace PRN231.Repo.Models
 {
@@ -16,7 +17,7 @@ namespace PRN231.Repo.Models
         public byte? TemplateType { get; set; }
         public byte? InvoiceType { get; set; }
 
-        public virtual Brand? Brand { get; set; }
-        public virtual ICollection<Invoice> Invoices { get; set; }
+        [JsonIgnore] public virtual Brand? Brand { get; set; }
+        [JsonIgnore] public virtual ICollection<Invoice> Invoices { get; set; }
     }
 }
