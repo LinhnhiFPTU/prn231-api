@@ -12,6 +12,14 @@ public class UnitOfWork : IUnitOfWork, IDisposable
 
     private bool disposed;
     private IGenericRepository<Role> roleRepository;
+    private IGenericRepository<Brand> brandRepository;
+    private IGenericRepository<BrandPartnerMapping> brandPartnerMappingRepository;
+    private IGenericRepository<InventoryItem> inventoryItemRepository;
+    private IGenericRepository<Invoice> invoiceRepository;
+    private IGenericRepository<InvoiceDetail> invoiceDetailRepository;
+    private IGenericRepository<InvoiceTemplate> invoiceTemplateRepository;
+    private IGenericRepository<Partner> partnerRepository;
+    private IGenericRepository<Store> storeRepository;
 
 
     public UnitOfWork(MyDBContext context)
@@ -27,6 +35,46 @@ public class UnitOfWork : IUnitOfWork, IDisposable
     public IGenericRepository<Role> RoleRepository
     {
         get { return roleRepository ??= new GenericRepository<Role>(context); }
+    }
+
+    public IGenericRepository<Brand> BrandRepository
+    {
+        get { return brandRepository ??= new GenericRepository<Brand>(context); }
+    }
+
+    public IGenericRepository<BrandPartnerMapping> BrandPartnerMappingRepository
+    {
+        get { return brandPartnerMappingRepository ??= new GenericRepository<BrandPartnerMapping>(context); }
+    }
+
+    public IGenericRepository<InventoryItem> InventoryItemRepository
+    {
+        get { return inventoryItemRepository ??= new GenericRepository<InventoryItem>(context); }
+    }
+
+    public IGenericRepository<Invoice> InvoiceRepository
+    {
+        get { return invoiceRepository ??= new GenericRepository<Invoice>(context); }
+    }
+
+    public IGenericRepository<InvoiceDetail> InvoiceDetailRepository
+    {
+        get { return invoiceDetailRepository ??= new GenericRepository<InvoiceDetail>(context); }
+    }
+
+    public IGenericRepository<InvoiceTemplate> InvoiceTemplateRepository
+    {
+        get { return invoiceTemplateRepository ??= new GenericRepository<InvoiceTemplate>(context); }
+    }
+
+    public IGenericRepository<Partner> PartnerRepository
+    {
+        get { return partnerRepository ??= new GenericRepository<Partner>(context); }
+    }
+
+    public IGenericRepository<Store> StoreRepository
+    {
+        get { return storeRepository ??= new GenericRepository<Store>(context); }
     }
 
     public void Save()
