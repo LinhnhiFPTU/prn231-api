@@ -12,6 +12,9 @@ public class UnitOfWork : IUnitOfWork, IDisposable
 
     private bool disposed;
     private IGenericRepository<Role> roleRepository;
+    private IGenericRepository<Invoice> invoiceRepository;
+    private IGenericRepository<InvoiceDetail> invoiceDetailRepository;
+    private IGenericRepository<InventoryItem> inventoryItemRepository;
 
 
     public UnitOfWork(MyDBContext context)
@@ -27,6 +30,11 @@ public class UnitOfWork : IUnitOfWork, IDisposable
     public IGenericRepository<Role> RoleRepository
     {
         get { return roleRepository ??= new GenericRepository<Role>(context); }
+    }
+
+    public IGenericRepository<InventoryItem> InventoryItemRepository
+    {
+        get { return inventoryItemRepository ??= new GenericRepository<InventoryItem>(context); }
     }
 
     public void Save()

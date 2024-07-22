@@ -6,6 +6,7 @@ public interface IUnitOfWork : IDisposable
 {
     IGenericRepository<Account> AccountRepository { get; }
     IGenericRepository<Role> RoleRepository { get; }
+    IGenericRepository<InventoryItem> InventoryItemRepository { get; }
     void Save();
 
     Task SaveAsync();
