@@ -1,25 +1,25 @@
 version: '3.4'
 
 networks:
-    myAppNetwork: 
+  myAppNetwork:
 
 services:
   SqlServerDb:
     container_name: SqlServerContainer
     image: mcr.microsoft.com/mssql/server:2022-latest
     ports:
-        - 8002:1433
+      - 8002:1433
     environment:
-        - ACCEPT_EULA=Y
-        - MSSQL_SA_PASSWORD=myStong_Password123#
+      - ACCEPT_EULA=Y
+      - MSSQL_SA_PASSWORD=myStrong_Password123#
 
   prn231.api:
     container_name: PRN231.API
     image: nhathd/prn231.api:dev
     ports:
-        - 14331:80
+      - 14331:80
     build:
       context: .
       dockerfile: PRN231.API/Dockerfile
     depends_on:
-        - SqlServerDb
+      - SqlServerDb

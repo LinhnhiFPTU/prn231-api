@@ -1,15 +1,20 @@
-﻿using System.Text.Json.Serialization;
+﻿using System;
+using System.Collections.Generic;
+using System.Text.Json.Serialization;
 
-namespace PRN231.Repo.Models;
-
-public class Account
+namespace PRN231.Repo.Models
 {
-    public Guid Id { get; init; }
-    public string Name { get; init; } = null!;
-    public string Username { get; init; } = null!;
-    public string Password { get; init; } = null!;
-    public Guid RoleId { get; init; }
-    public string Status { get; init; } = null!;
+    public partial class Account
+    {
+        public int Id { get; set; }
+        public string? Name { get; set; }
+        public string? Password { get; set; }
+        public byte? Status { get; set; }
+        public int? RoleId { get; set; }
+        public string? Username { get; set; }
+        public int? BrandId { get; set; }
 
-    [JsonIgnore] public virtual Role Role { get; set; } = null!;
+        [JsonIgnore] public virtual Brand? Brand { get; set; }
+        [JsonIgnore] public virtual Role? Role { get; set; }
+    }
 }

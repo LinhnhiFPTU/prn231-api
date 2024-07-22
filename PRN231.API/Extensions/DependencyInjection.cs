@@ -31,7 +31,7 @@ public static class DependencyInjection
             .SetBasePath(Directory.GetCurrentDirectory())
             .AddJsonFile("appsettings.json", true, true)
             .Build();
-        var strConn = config["ConnectionStrings:MyStoreDB"];
+        var strConn = config["ConnectionStrings:Project"];
 
         return strConn;
     }

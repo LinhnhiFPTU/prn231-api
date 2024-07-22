@@ -5,6 +5,6 @@ namespace PRN231.API.Enums;
 public enum RoleEnum
 {
     [Description("ADMIN")] ADMIN,
-    [Description("STAFF")] STAFF,
-    [Description("CUSTOMER")] CUSTOMER
+    [Description("STORE_MANAGER")] STORE_MANAGER,
+    [Description("CASHIER")] CASHIER
 }
