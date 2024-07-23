@@ -45,9 +45,9 @@ namespace PRN231.API.Controllers
                     itemVatAmount =  itemTotal * (double)(item.Vatrate / 100);
                 }
 
-                totalWithoutVat += itemTotal - itemVatAmount;
+                totalWithoutVat += itemTotal;
                 totalVatAmount += itemVatAmount;
-                totalAmount += itemTotal;
+                totalAmount += itemTotal + itemVatAmount;
             }
             
             var result = new BasicResponse
