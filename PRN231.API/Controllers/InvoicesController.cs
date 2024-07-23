@@ -68,7 +68,7 @@ public class InvoicesController : ControllerBase
 
     [HttpGet("{id}")]
     [AuthorizePolicy(RoleEnum.ADMIN, RoleEnum.STORE_MANAGER)]
-    public IActionResult GetInvoice(Guid id)
+    public IActionResult GetInvoice(int id)
     {
         var invoice = _unitOfWork.InvoiceRepository.GetById(id);
         if (invoice == null) throw new KeyNotFoundException("Invoice ID " + id + " does not exist");
@@ -98,6 +98,7 @@ public class InvoicesController : ControllerBase
                 invoice.TotalAmountWithoutVat,
                 invoice.TotalVatamount,
                 invoice.TotalAmount,
+                invoice.InvoiceDetails,
                 StoreName = storeOfInvoice.Name
             }
         };
@@ -189,7 +190,7 @@ public class InvoicesController : ControllerBase
 
     [HttpDelete("{id}")]
     [AuthorizePolicy(RoleEnum.ADMIN, RoleEnum.STORE_MANAGER)]
-    public async Task<IActionResult> DeleteInvoice(Guid id)
+    public async Task<IActionResult> DeleteInvoice(int id)
     {
         var invoice = _unitOfWork.InvoiceRepository.GetById(id);
         if (invoice == null) throw new KeyNotFoundException("Invoice ID " + id + " does not exist");

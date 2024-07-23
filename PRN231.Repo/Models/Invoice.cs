@@ -32,6 +32,6 @@ namespace PRN231.Repo.Models
 
         [JsonIgnore] public virtual InvoiceTemplate? InvoiceTemplate { get; set; }
         [JsonIgnore] public virtual Store? Store { get; set; }
-        [JsonIgnore] public virtual ICollection<InvoiceDetail> InvoiceDetails { get; set; }
+        public virtual ICollection<InvoiceDetail> InvoiceDetails { get; set; }
     }
 }
