@@ -1,4 +1,4 @@
-﻿using PRN231.Repo.Models;
+using PRN231.Repo.Models;
 
 namespace PRN231.Repo.Interfaces;
 
