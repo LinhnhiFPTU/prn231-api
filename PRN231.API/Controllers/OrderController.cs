@@ -1,45 +1,52 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
+using PRN231.API.Payload.Request.Orders;
 using PRN231.API.Payload.Response;
 using PRN231.API.Payload.Response.POS;
-using PRN231.Repo.Implements;
 using PRN231.Repo.Interfaces;
-using PRN231.Repo.Models;
 
 namespace PRN231.API.Controllers
 {
     [ApiController]
-    [Route("pos")]
-    public class PosController : Controller
+    [Route("orders")]
+    public class OrderController : Controller
     {
         private readonly IUnitOfWork _unitOfWork;
 
-        public PosController(IUnitOfWork unitOfWork)
+        public OrderController(IUnitOfWork unitOfWork)
         {
             _unitOfWork = unitOfWork;
         }
-        [HttpPost("orders")]
-        public IActionResult MakeOrderFromPOS(List<int> inventoryItemId)
+        
+        [HttpPost]
+        public IActionResult MakeOrderFromPOS(List<MakeOrderRequest> orderRequestItems)
         {
-            var inventoryItems = _unitOfWork.InventoryItemRepository.Get(filter: i => inventoryItemId.Contains(i.Id)).ToList();
+            var inventoryItems = _unitOfWork.InventoryItemRepository.Get(filter: i => orderRequestItems.Select(item => item.InventoryItemId).Contains(i.Id)).ToList();
             double totalWithoutVat = 0;
             double totalVatAmount = 0;
             double totalAmount = 0;
 
             foreach (var item in inventoryItems)
             {
-                double itemTotal = (double)item.UnitPrice.Value;
-                double itemVat = 0;
+                if (item.UnitPrice == null) continue;
+                
+                var itemIndex = inventoryItems.FindIndex(i => i.Id == item.Id);
+                if (itemIndex == -1) continue;
+                
+                var quantity = orderRequestItems[itemIndex].Quantity;
+
+                var itemTotal = (double) item.UnitPrice.Value * quantity;
+                double itemVatAmount = 0;
 
                 if (item.Vatrate.HasValue)
                 {
-                    itemVat =  itemTotal * (double)(item.Vatrate / 100);
+                    itemVatAmount =  itemTotal * (double)(item.Vatrate / 100);
                 }
 
-                totalWithoutVat += itemTotal;
-                totalVatAmount += itemVat;
-                totalAmount += itemTotal + itemVat;
+                totalWithoutVat += itemTotal - itemVatAmount;
+                totalVatAmount += itemVatAmount;
+                totalAmount += itemTotal;
             }
+            
             var result = new BasicResponse
             {
                 IsSuccess = true,
