@@ -1,4 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using PRN231.API.Enums;
+using PRN231.API.Middlewares;
 using PRN231.API.Payload.Request.Orders;
 using PRN231.API.Payload.Response;
 using PRN231.API.Payload.Response.POS;
@@ -18,6 +20,7 @@ namespace PRN231.API.Controllers
         }
         
         [HttpPost]
+        [AuthorizePolicy(RoleEnum.ADMIN, RoleEnum.STORE_MANAGER, RoleEnum.CASHIER)]
         public IActionResult MakeOrderFromPOS(List<MakeOrderRequest> orderRequestItems)
         {
             var inventoryItems = _unitOfWork.InventoryItemRepository.Get(filter: i => orderRequestItems.Select(item => item.InventoryItemId).Contains(i.Id)).ToList();
